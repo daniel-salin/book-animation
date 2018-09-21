@@ -1,0 +1,99 @@
+
+.container {
+    position: relative;
+    height: 400px;
+    width: 400px;
+    margin: 50px;
+    border: 1px solid black;
+    background-color: black;
+}
+
+.book {
+    transform: perspective(150px) rotatex(5deg);
+    position: absolute;
+    top: 50px;
+    background-color: brown;
+    height: 300px;
+    width: 400px;
+}
+
+/* --------------------------------
+ Animation for turning the page and simultaneously hiding the text.
+-------------------------------- */ 
+
+@keyframes pageFlip {
+    0% {
+        transform: perspective(400px) rotatey(0deg);
+        border-right: none;
+    }
+
+    55% {
+        color: beige;
+    }
+    100% {
+        border-right: none;
+        transform: perspective(400px) rotatey(180deg);
+    }
+}
+
+@keyframes hide {
+0% {
+    color: black;
+}
+100% {
+    color: beige;
+}
+}
+
+/* -------------------------------- 
+The page we turn. Avoid using border on the right hand
+to give the appearance that we're only turning a single page.
+-------------------------------- */
+
+.pages {
+    margin: -10px 5px;
+    background-color: beige;
+    height: 300px;
+    background-color: beige;
+    border: 1px solid black;
+    border-width: 0 1px 0 1px;
+    animation: pageFlip 10s;
+}
+
+.pages p, h1 {
+    color: beige;
+    margin: 10px;
+    max-width: 170px;
+    padding-top: 10px;
+    animation: hide 5s;
+    font-size: 0.9em;
+    text-align: justify;
+}
+
+/* --------------------------------
+ Gives the illusion of being in the middle of the book
+whilst also hiding the right side of the pages being turned
+into the book
+-------------------------------- */
+
+.pagesUnder {
+    margin: 0 5px;
+    height: 300px;
+    background-color: beige;
+    border: 2px solid black;
+}
+
+/* --------------------------------
+Creating a dividing line between the pages that
+gives the appearance of a seperate page being turned
+-------------------------------- */
+
+.divider {
+    z-index: 1;
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    background-color: black;
+    box-shadow: 0 0 10px;
+    height: 100%;
+}
